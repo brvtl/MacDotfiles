@@ -1,0 +1,101 @@
+# =============================================================================
+# ZSH ALIASES (macOS)
+# =============================================================================
+
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Project navigation
+alias gocode='cd ~/code'
+alias gowork='cd ~/code/work'
+alias gopersonal='cd ~/code/personal'
+alias gosandbox='cd ~/code/sandbox'
+
+# List directory contents
+alias ll='ls -laG'
+alias la='ls -AG'
+alias l='ls -CFG'
+alias lsd='ls -laG | grep "^d"'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gb='git branch'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias glog='git log --oneline --graph --decorate'
+alias gst='git stash'
+alias gstp='git stash pop'
+
+# Docker shortcuts
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias di='docker images'
+alias dex='docker exec -it'
+alias dlog='docker logs'
+alias dlogf='docker logs -f'
+
+# Kubernetes shortcuts
+alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias kl='kubectl logs'
+alias kex='kubectl exec -it'
+alias kctx='kubectl config use-context'
+alias kgctx='kubectl config get-contexts'
+
+# Development shortcuts
+alias serve='python3 -m http.server 8000'
+alias ports='lsof -i -P | grep LISTEN'
+
+# Terraform shortcuts
+alias tf='terraform'
+alias tfi='terraform init'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfaa='terraform apply -auto-approve'
+alias tfd='terraform destroy'
+alias tfv='terraform validate'
+alias tff='terraform fmt'
+alias tfs='terraform show'
+alias tfo='terraform output'
+
+# System shortcuts
+alias c='clear'
+alias h='history'
+alias j='jobs'
+alias path='echo $PATH | tr ":" "\n"'
+
+# File operations
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias mkdir='mkdir -p'
+
+# Network shortcuts
+alias myip='curl -s https://ipinfo.io/ip'
+alias localip="ipconfig getifaddr en0"
+alias ping='ping -c 5'
+
+# macOS package management (Homebrew)
+alias update='brew update && brew upgrade'
+alias install='brew install'
+alias search='brew search'
+alias remove='brew uninstall'
+alias cleanup='brew cleanup'
+
+# History search
+alias hg='history | grep'
+
+# Lazygit
+alias lg='lazygit'

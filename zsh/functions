@@ -1,0 +1,79 @@
+# =============================================================================
+# ZSH FUNCTIONS
+# =============================================================================
+
+# Create a new directory and enter it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Extract any archive
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1     ;;
+            *.tar.gz)    tar xzf $1     ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar e $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xf $1      ;;
+            *.tbz2)      tar xjf $1     ;;
+            *.tgz)       tar xzf $1     ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)          echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# Create a backup of a file
+bak() {
+    cp "$1" "$1.bak.$(date +%Y%m%d_%H%M%S)"
+}
+
+# Find and kill process on port
+killport() {
+    local pids=($(lsof -ti:$1))
+    if [ ${#pids[@]} -eq 0 ]; then
+        echo "No process found on port $1"
+        return 1
+    else
+        echo "Killing process(es) ${pids[@]} on port $1"
+        kill -9 ${pids[@]}
+    fi
+}
+
+# Git log with graph
+gitlog() {
+    git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+}
+
+# Quick directory size
+dsize() {
+    du -sh "$1" 2>/dev/null | cut -f1
+}
+
+# Weather
+weather() {
+    curl -s "wttr.in/$1?format=3"
+}
+
+# Create a new project directory
+newproj() {
+    mkcd ~/code/$1
+    git init
+    echo "# $1" > README.md
+    git add .
+    git commit -m "Initial commit"
+}
+
+# FZF directory navigation
+fzf-cd-widget() {
+    local dir
+    dir=$(find ~/code -type d 2>/dev/null | fzf --height 40% --reverse --border) && cd "$dir"
+}
+zle -N fzf-cd-widget
+bindkey '^t' fzf-cd-widget

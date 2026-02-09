@@ -1,0 +1,17 @@
+[user]
+	email = peter@devthe.net
+	name = Peter Garbers
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILzxdtUdffO94cxWHTHSAddrS7mSX/IQajso4lYEFkWO
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+	allowedSignersFile = /Users/peter/.ssh/allowed_signers
+[commit]
+	gpgsign = true

@@ -1,0 +1,158 @@
+# Lazygit configuration
+# Gruvbox Dark theme to match system
+
+gui:
+  # Theme colors (Gruvbox Dark)
+  theme:
+    activeBorderColor:
+      - "#d79921" # Gruvbox yellow
+      - bold
+    inactiveBorderColor:
+      - "#928374" # Gruvbox gray
+    searchingActiveBorderColor:
+      - "#689d6a" # Gruvbox aqua
+      - bold
+    optionsTextColor:
+      - "#458588" # Gruvbox blue
+    selectedLineBgColor:
+      - "#3c3836" # Gruvbox bg1
+    cherryPickedCommitBgColor:
+      - "#b16286" # Gruvbox purple
+    cherryPickedCommitFgColor:
+      - "#ebdbb2" # Gruvbox fg
+    unstagedChangesColor:
+      - "#cc241d" # Gruvbox red
+    defaultFgColor:
+      - "#ebdbb2" # Gruvbox fg
+  # Window settings
+  border: rounded
+  showFileTree: true
+  showRandomTip: false
+  showCommandLog: false
+  showBottomLine: true
+  sidePanelWidth: 0.3333
+  # Mouse support
+  mouseEvents: true
+  # Skip confirmation dialogs for these actions
+  skipDiscardChangeWarning: false
+  skipStashWarning: false
+git:
+  # Paging
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
+  # Commit settings
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+  # Branch settings
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=format:'%C(yellow)%h%C(reset) - %C(green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)%C(auto)%d%C(reset)' {{branchName}} --
+  # Auto-fetch
+  autoFetch: true
+  autoRefresh: true
+  # Parse emoji in commits
+  parseEmoji: true
+# Keybindings (vim-style to match your setup)
+keybinding:
+  universal:
+    quit: q
+    quit-alt1: <c-c>
+    return: <esc>
+    togglePanel: <tab>
+    prevItem: <up>
+    nextItem: <down>
+    prevItem-alt: k
+    nextItem-alt: j
+    prevPage: <c-u>
+    nextPage: <c-d>
+    gotoTop: g
+    gotoBottom: G
+    scrollLeft: h
+    scrollRight: l
+    prevBlock: <left>
+    nextBlock: <right>
+    prevBlock-alt: H
+    nextBlock-alt: L
+    copyToClipboard: <c-o>
+    openRecentRepos: <c-r>
+    submitEditorText: <enter>
+    extrasMenu: "@"
+    toggleWhitespaceInDiffView: <c-w>
+    increaseContextInDiffView: "}"
+    decreaseContextInDiffView: "{"
+  files:
+    commitChanges: c
+    commitChangesWithEditor: C
+    amendLastCommit: A
+    commitChangesWithoutHook: w
+    ignoreFile: i
+    refreshFiles: r
+    stashAllChanges: s
+    viewStashOptions: S
+    toggleStagedAll: a
+    viewResetOptions: D
+    fetch: f
+    toggleTreeView: "`"
+    openMergeOptions: M
+    openStatusFilter: <c-b>
+  branches:
+    createPullRequest: o
+    viewPullRequestOptions: O
+    checkoutBranchByName: c
+    forceCheckoutBranch: F
+    rebaseBranch: r
+    renameBranch: R
+    mergeIntoCurrentBranch: M
+    viewGitFlowOptions: i
+    fastForward: f
+    createTag: T
+    pushTag: P
+    setUpstream: u
+    fetchRemote: f
+  commits:
+    squashDown: s
+    renameCommit: r
+    renameCommitWithEditor: R
+    viewResetOptions: g
+    markCommitAsFixup: f
+    createFixupCommit: F
+    squashAboveCommits: S
+    moveDownCommit: <c-j>
+    moveUpCommit: <c-k>
+    amendToCommit: A
+    pickCommit: p
+    revertCommit: t
+    cherryPickCopy: c
+    cherryPickCopyRange: C
+    pasteCommits: v
+    tagCommit: T
+    checkoutCommit: <space>
+    resetCherryPick: <c-R>
+    copyCommitMessageToClipboard: <c-y>
+    openLogMenu: <c-l>
+    viewBisectOptions: b
+  stash:
+    popStash: g
+    renameStash: r
+  status:
+    checkForUpdate: u
+    recentRepos: <enter>
+    allBranchesLogGraph: a
+  submodules:
+    init: i
+    update: u
+    bulkMenu: b
+# OS-specific settings
+os:
+  editPreset: "nvim"
+  openCommand: "open {{filename}}"
+# Refresh mode
+refresher:
+  refreshInterval: 10
+  fetchInterval: 60
+# Confirmation settings
+confirmOnQuit: false
+# Update settings
+update:
+  method: never

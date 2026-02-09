@@ -1,0 +1,40 @@
+# =============================================================================
+# ZSH EXPORTS - Environment Variables (macOS)
+# =============================================================================
+
+# Language environment
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Starship configuration path
+export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
+
+# Doom Emacs configuration directory
+export DOOMDIR="$HOME/.config/doom"
+
+# Claude Code configuration directory
+export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
+
+# Editor preferences
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# Go configuration (using asdf)
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# Node.js configuration
+export NODE_ENV=development
+
+# Docker configuration
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
+# FZF configuration
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+if command -v fd &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+fi
+
+# Add ~/.local/bin to PATH
+export PATH="$HOME/.local/bin:$PATH"

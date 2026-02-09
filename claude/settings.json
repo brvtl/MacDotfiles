@@ -1,0 +1,15 @@
+{
+  "enabledPlugins": {
+    "payment-processing@claude-code-workflows": true,
+    "javascript-typescript@claude-code-workflows": true,
+    "systems-programming@claude-code-workflows": true,
+    "tdd-workflows@claude-code-workflows": true,
+    "unit-testing@claude-code-workflows": true,
+    "backend-development@claude-code-workflows": true,
+    "cloud-infrastructure@claude-code-workflows": true,
+    "llm-application-dev@claude-code-workflows": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "model": "opus"
+}

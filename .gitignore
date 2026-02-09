@@ -1,0 +1,22 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~
+*.swp
+*.swo
+*.bak
+.*.swp
+
+# Temp and cache
+*.log
+*.cache
+
+# Claude Code runtime data
+claude/*
+!claude/commands/
+!claude/agents/
+!claude/skills/
+!claude/settings.json
+!claude/CLAUDE.md
