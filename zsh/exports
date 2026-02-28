@@ -6,15 +6,6 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Starship configuration path
-export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
-
-# Doom Emacs configuration directory
-export DOOMDIR="$HOME/.config/doom"
-
-# Claude Code configuration directory
-export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
-
 # Editor preferences
 export EDITOR='nvim'
 export VISUAL='nvim'

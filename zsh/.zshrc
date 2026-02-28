@@ -1,9 +1,7 @@
 # =============================================================================
 # .ZSHRC - Modular ZSH Configuration (macOS)
 # =============================================================================
-
-# Path to Oh My Zsh installation
-export ZSH="$HOME/.oh-my-zsh"
+# XDG variables and ZSH/ZDOTDIR are set in .zshenv
 
 # =============================================================================
 # OH MY ZSH SETTINGS
@@ -35,6 +33,7 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    brew
     docker
     docker-compose
     kubectl
@@ -48,6 +47,7 @@ plugins=(
     python
     pip
     virtualenv
+    vscode
     macos
     history
     dirhistory
@@ -68,7 +68,7 @@ plugins=(
 # SOURCE OH MY ZSH
 # =============================================================================
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # =============================================================================
 # HOMEBREW
@@ -86,9 +86,9 @@ eval "$(starship init zsh)"
 # ASDF VERSION MANAGER
 # =============================================================================
 
-if [ -f "$HOME/.asdf/asdf.sh" ]; then
-    . "$HOME/.asdf/asdf.sh"
-    fpath=(${ASDF_DIR}/completions $fpath)
+if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+    fpath=("$ASDF_DATA_DIR/completions" $fpath)
     autoload -Uz compinit
     compinit
 fi
@@ -98,13 +98,13 @@ fi
 # =============================================================================
 
 # Source exports
-[ -f ~/.zsh_exports ] && source ~/.zsh_exports
+[ -f "$ZDOTDIR/exports" ] && source "$ZDOTDIR/exports"
 
 # Source aliases
-[ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
+[ -f "$ZDOTDIR/aliases" ] && source "$ZDOTDIR/aliases"
 
 # Source functions
-[ -f ~/.zsh_functions ] && source ~/.zsh_functions
+[ -f "$ZDOTDIR/functions" ] && source "$ZDOTDIR/functions"
 
 # =============================================================================
 # HISTORY CONFIGURATION
@@ -112,7 +112,7 @@ fi
 
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.zsh_history
+HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
@@ -126,7 +126,7 @@ setopt SHARE_HISTORY
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh"
 zstyle ':completion:*' menu select
 
 # =============================================================================
@@ -146,14 +146,14 @@ bindkey '^w' backward-kill-word
 bindkey '^y' yank
 
 # FZF keybindings (Homebrew paths)
-[ -f "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh" ] && source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
-[ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ] && source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ] && source /opt/homebrew/opt/fzf/shell/completion.zsh
 
 # =============================================================================
 # LOCAL CUSTOMIZATIONS
 # =============================================================================
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f "$ZDOTDIR/.zshrc.local" ] && source "$ZDOTDIR/.zshrc.local"
 [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 
 # 1Password SSH Agent (macOS)
