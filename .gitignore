@@ -13,6 +13,10 @@ Thumbs.db
 *.log
 *.cache
 
+# ZSH runtime artifacts
+zsh/.zcompdump*
+zsh/.zsh_sessions/
+
 # Claude Code runtime data
 claude/*
 !claude/commands/
