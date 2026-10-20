@@ -15,6 +15,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | `alacritty/` | Alacritty terminal (Gruvbox Dark, FiraCode Nerd Font) |
 | `starship/` | Starship prompt config |
 | `lazygit/` | LazyGit UI config (Gruvbox Dark, vim keys) |
+| `tmux/` | oh-my-tmux customizations (`tmux.conf.local`), shared with ArchDotfiles |
 | `doom/` | Doom Emacs (init.el, config.el, packages.el) |
 | `claude/` | Claude Code settings, agents, commands |
 | `install.sh` | Homebrew-based install + XDG symlink script |
@@ -40,6 +41,7 @@ The install script writes a minimal `~/.zshenv` bootstrap and creates these syml
 - `~/.config/alacritty/` -> repo `alacritty/`
 - `~/.config/starship/` -> repo `starship/`
 - `~/.config/lazygit/` -> repo `lazygit/`
+- `~/.config/tmux/` -> repo `tmux/` (`tmux.conf` -> oh-my-tmux in `~/.local/share/tmux/`)
 - `~/.config/doom/` -> repo `doom/`
 - `~/.config/claude/` -> repo `claude/`
 

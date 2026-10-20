@@ -133,6 +133,7 @@ install_packages() {
         fd
         ripgrep
         lazygit
+        tmux
         git
         neovim
         git-delta
@@ -204,6 +205,7 @@ setup_symlinks() {
     create_symlink "$SCRIPT_DIR/alacritty" "$XDG_CONFIG_HOME/alacritty"
     create_symlink "$SCRIPT_DIR/starship" "$XDG_CONFIG_HOME/starship"
     create_symlink "$SCRIPT_DIR/lazygit" "$XDG_CONFIG_HOME/lazygit"
+    create_symlink "$SCRIPT_DIR/tmux" "$XDG_CONFIG_HOME/tmux"
     create_symlink "$SCRIPT_DIR/doom" "$XDG_CONFIG_HOME/doom"
     create_symlink "$SCRIPT_DIR/claude" "$XDG_CONFIG_HOME/claude"
 
@@ -239,6 +241,27 @@ setup_oh_my_zsh() {
     fi
 
     log_success "Oh My Zsh configured"
+}
+
+# =============================================================================
+# TMUX SETUP
+# =============================================================================
+
+setup_tmux() {
+    log_info "Setting up oh-my-tmux..."
+
+    local omt_dir="$XDG_DATA_HOME/tmux/oh-my-tmux"
+
+    if [ ! -d "$omt_dir" ]; then
+        log_info "Cloning oh-my-tmux..."
+        git clone https://github.com/gpakosz/.tmux "$omt_dir"
+    fi
+
+    # tmux.conf is oh-my-tmux's own file (gitignored); customizations live in
+    # the tracked tmux.conf.local. Plugins are fetched by TPM on first launch.
+    ln -sfn "$omt_dir/.tmux.conf" "$SCRIPT_DIR/tmux/tmux.conf"
+
+    log_success "oh-my-tmux configured"
 }
 
 # =============================================================================
@@ -341,6 +364,9 @@ main() {
         asdf)
             setup_asdf
             ;;
+        tmux)
+            setup_tmux
+            ;;
         doom)
             setup_doom_emacs
             ;;
@@ -357,6 +383,7 @@ main() {
             migrate_data
             setup_oh_my_zsh
             setup_asdf
+            setup_tmux
             setup_ssh
             cleanup_old_symlinks
             setup_symlinks
@@ -372,7 +399,7 @@ main() {
             echo ""
             ;;
         *)
-            echo "Usage: $0 [packages|symlinks|zsh|asdf|doom|ssh|migrate|all]"
+            echo "Usage: $0 [packages|symlinks|zsh|asdf|tmux|doom|ssh|migrate|all]"
             exit 1
             ;;
     esac
