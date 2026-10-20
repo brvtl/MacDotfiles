@@ -16,6 +16,7 @@ cd ~/code/MacDotfiles
 - **Alacritty** - GPU-accelerated terminal
 - **Git** - 1Password SSH signing, GitHub CLI credentials, delta pager
 - **LazyGit** - Terminal UI for git
+- **tmux** - oh-my-tmux + Gruvbox pill status bar, resurrect/continuum, fzf session picker
 - **Doom Emacs** - Go, Python, JS/TS, Terraform, Magit
 - **Starship** - Cross-shell prompt
 - **Claude Code** - AI dev tool config + agents
@@ -31,6 +32,7 @@ Everything lives under `~/.config/` via directory symlinks:
 ~/.config/alacritty/         -> repo/alacritty/
 ~/.config/starship/          -> repo/starship/
 ~/.config/lazygit/           -> repo/lazygit/
+~/.config/tmux/              -> repo/tmux/
 ~/.config/doom/              -> repo/doom/
 ~/.config/claude/            -> repo/claude/
 ```

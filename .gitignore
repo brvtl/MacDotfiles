@@ -24,3 +24,7 @@ claude/*
 !claude/skills/
 !claude/settings.json
 !claude/CLAUDE.md
+
+# tmux: oh-my-tmux symlink (made by install.sh) and TPM plugins
+tmux/tmux.conf
+tmux/plugins/
