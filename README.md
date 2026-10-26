@@ -16,7 +16,7 @@ cd ~/code/MacDotfiles
 - **Alacritty** - GPU-accelerated terminal
 - **Git** - 1Password SSH signing, GitHub CLI credentials, delta pager
 - **LazyGit** - Terminal UI for git
-- **tmux** - oh-my-tmux + Gruvbox pill status bar, resurrect/continuum, fzf session picker
+- **tmux** - oh-my-tmux + Gruvbox pill status bar, resurrect/continuum, fzf session picker, searchable cheatsheet (`prefix ?`), every terminal starts in tmux
 - **Doom Emacs** - Go, Python, JS/TS, Terraform, Magit
 - **Starship** - Cross-shell prompt
 - **Claude Code** - AI dev tool config + agents

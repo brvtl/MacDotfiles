@@ -1,0 +1,52 @@
+# tmux cheatsheet, shared by ArchDotfiles and MacDotfiles.
+# Shown by C-a ? (tmux popup), `cheat` (shell) and, on Arch, Super+/ (rofi),
+# together with ~/.config/cheatsheet/sheet.txt when that exists.
+# Format: "## section" headers, then "keys  description" separated by 2+ spaces.
+
+## tmux
+C-a ?                  this cheatsheet
+C-a c                  new window (current dir)
+C-a ,                  rename window
+C-a | / C-a v          split side by side
+C-a s / C-a -          split stacked
+Alt+h/j/k/l            move between panes (no prefix)
+C-a H/J/K/L            resize pane
+C-a z                  zoom pane (toggle)
+C-a < / C-a >          swap pane up / down
+C-a !                  break pane into its own window
+C-a x                  kill pane
+C-a &                  kill window
+Alt+1..9               jump to window (no prefix)
+Alt+[ / Alt+]          previous / next window
+C-a Tab                last window
+C-a q                  show pane numbers
+C-a t                  popup shell in current dir
+C-a g                  lazygit popup
+C-a m                  toggle mouse
+C-a e / C-a r          edit / reload tmux config
+C-a :                  command prompt
+F12                    hand keys to nested tmux over SSH (F12 again to return)
+
+## session
+C-a o                  fuzzy pick a session or project
+C-a S                  session tree
+C-a w                  window tree
+C-a N                  new named session in current dir
+C-a $                  rename session
+C-a S then x           kill a session (from the tree)
+tmux kill-session -t NAME  kill a session from a shell
+C-a BSpace             back to last session
+C-a ( / C-a )          previous / next session
+C-a d                  detach (session keeps running)
+C-a C-s / C-a C-r      save / restore all sessions (auto-saved every 15m)
+tmux ls                list sessions
+tmux a -t NAME         attach to a session
+NO_TMUX=1 alacritty    terminal without tmux
+
+## copy
+C-a Enter / C-a [      copy mode (vi keys)
+v / C-v                start selection / rectangle
+y                      copy (reaches your local clipboard over SSH too)
+/ or ?                 search down / up
+q                      leave copy mode
+C-a p                  paste

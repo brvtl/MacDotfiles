@@ -473,6 +473,8 @@ bind BSpace switch-client -l
 # popups in the current dir: t scratch shell, g lazygit
 bind t display-popup -E -w 80% -h 80% -d "#{pane_current_path}"
 bind g display-popup -E -w 90% -h 90% -d "#{pane_current_path}" lazygit
+# ? searchable cheatsheet (tmux/cheatsheet.txt + the machine's own sheet)
+bind ? display-popup -E -w 80% -h 80% "~/.config/tmux/scripts/cheatsheet.sh" #!important
 
 # y copies the selection: OSC 52 (set-clipboard above) carries it to the
 # machine you're sitting at, and on the Mac it also goes through pbcopy
@@ -585,6 +587,10 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
+# save right away when a session is killed, so continuum's restore doesn't
+# bring it back (see scripts/save-on-close.sh). Fixed index keeps reloads from
+# stacking duplicate hooks.
+set-hook -g 'session-closed[10]' 'run-shell -b "~/.config/tmux/scripts/save-on-close.sh"'
 
 
 # -- custom variables ----------------------------------------------------------
