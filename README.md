@@ -41,7 +41,7 @@ Data stored in XDG locations:
 
 ```
 ~/.local/share/oh-my-zsh/    Oh My Zsh
-~/.local/share/asdf/         asdf version manager
+~/.local/share/mise/         mise version manager
 ~/.local/state/zsh/history   ZSH history
 ```
 

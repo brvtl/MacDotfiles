@@ -15,8 +15,5 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"
 
 # App overrides
-export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
 export DOOMDIR="$XDG_CONFIG_HOME/doom"
-export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
-export TELEGRAM_STATE_DIR="$XDG_CONFIG_HOME/claude/channels/telegram"

@@ -61,7 +61,6 @@ plugins=(
     sudo
     fzf
     z
-    1password
 )
 
 # =============================================================================
@@ -83,15 +82,11 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 
 # =============================================================================
-# ASDF VERSION MANAGER
+# MISE VERSION MANAGER
 # =============================================================================
 
-if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
-    fpath=("$ASDF_DATA_DIR/completions" $fpath)
-    autoload -Uz compinit
-    compinit
-fi
+# Reads .tool-versions and .mise.toml
+eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 # =============================================================================
 # MODULAR CONFIGURATION
@@ -144,17 +139,14 @@ bindkey '^k' kill-line
 bindkey '^u' backward-kill-line
 bindkey '^w' backward-kill-word
 bindkey '^y' yank
-
-# FZF keybindings (Homebrew paths)
-[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ] && source /opt/homebrew/opt/fzf/shell/completion.zsh
+bindkey '^f' fzf-file-widget
+bindkey '^r' fzf-history-widget
 
 # =============================================================================
 # LOCAL CUSTOMIZATIONS
 # =============================================================================
 
 [ -f "$ZDOTDIR/.zshrc.local" ] && source "$ZDOTDIR/.zshrc.local"
-[ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 
 # 1Password SSH Agent (macOS)
 [ -S "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" ] && \
