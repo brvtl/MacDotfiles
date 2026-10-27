@@ -17,7 +17,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | `lazygit/` | LazyGit UI config (Gruvbox Dark, vim keys) |
 | `tmux/` | oh-my-tmux customizations (`tmux.conf.local`), `scripts/`, `cheatsheet.txt`; kept identical with ArchDotfiles (change both) |
 | `doom/` | Doom Emacs (init.el, config.el, packages.el) |
-| `claude/` | Claude Code settings, agents, commands |
+| `claude/` | Claude Code `settings.json`, `commands/`, statusline script |
 | `install.sh` | Homebrew-based install + XDG symlink script |
 
 ## Key Details
@@ -46,7 +46,8 @@ The install script writes a minimal `~/.zshenv` bootstrap and creates these syml
 - `~/.config/lazygit/` -> repo `lazygit/`
 - `~/.config/tmux/` -> repo `tmux/` (`tmux.conf` -> oh-my-tmux in `~/.local/share/tmux/`)
 - `~/.config/doom/` -> repo `doom/`
-- `~/.config/claude/` -> repo `claude/` (not read by Claude Code, which uses `~/.claude`; `CLAUDE_CONFIG_DIR` is deliberately unset)
+- `~/.config/claude/` is a real directory (Claude Code's runtime state); `~/.claude` -> `~/.config/claude`. `CLAUDE_CONFIG_DIR` stays unset so GUI apps and the Keychain login keep working
+- `~/.config/claude/{settings.json,commands,awesome-statusline.sh}` -> repo `claude/`
 
 ## Data Locations (XDG)
 

@@ -34,7 +34,7 @@ Everything lives under `~/.config/` via directory symlinks:
 ~/.config/lazygit/           -> repo/lazygit/
 ~/.config/tmux/              -> repo/tmux/
 ~/.config/doom/              -> repo/doom/
-~/.config/claude/            -> repo/claude/
+~/.claude                    -> ~/.config/claude/ (real dir; settings.json, commands/, statusline -> repo/claude/)
 ```
 
 Data stored in XDG locations:
