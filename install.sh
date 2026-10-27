@@ -207,9 +207,33 @@ setup_symlinks() {
     create_symlink "$SCRIPT_DIR/lazygit" "$XDG_CONFIG_HOME/lazygit"
     create_symlink "$SCRIPT_DIR/tmux" "$XDG_CONFIG_HOME/tmux"
     create_symlink "$SCRIPT_DIR/doom" "$XDG_CONFIG_HOME/doom"
-    create_symlink "$SCRIPT_DIR/claude" "$XDG_CONFIG_HOME/claude"
+
+    setup_claude
 
     log_success "Symlinks configured"
+}
+
+# =============================================================================
+# CLAUDE CODE SETUP
+# =============================================================================
+
+# ~/.config/claude is a real directory (Claude Code keeps its login, history
+# and projects there) with ~/.claude linked to it, so GUI apps and the
+# Keychain login keep working without CLAUDE_CONFIG_DIR. Only the tracked
+# files below are links into the repo.
+setup_claude() {
+    local claude_dir="$XDG_CONFIG_HOME/claude"
+
+    if [ -d "$HOME/.claude" ] && [ ! -L "$HOME/.claude" ] && [ ! -e "$claude_dir" ]; then
+        log_info "Moving ~/.claude -> $claude_dir"
+        mv "$HOME/.claude" "$claude_dir"
+    fi
+    mkdir -p "$claude_dir"
+    [ -L "$HOME/.claude" ] || create_symlink "$claude_dir" "$HOME/.claude"
+
+    create_symlink "$SCRIPT_DIR/claude/settings.json" "$claude_dir/settings.json"
+    create_symlink "$SCRIPT_DIR/claude/commands" "$claude_dir/commands"
+    create_symlink "$SCRIPT_DIR/claude/awesome-statusline.sh" "$claude_dir/awesome-statusline.sh"
 }
 
 # =============================================================================

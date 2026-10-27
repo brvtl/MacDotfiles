@@ -17,7 +17,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | `lazygit/` | LazyGit UI config (Gruvbox Dark, vim keys) |
 | `tmux/` | oh-my-tmux customizations (`tmux.conf.local`), `scripts/`, `cheatsheet.txt`; kept identical with ArchDotfiles (change both) |
 | `doom/` | Doom Emacs (init.el, config.el, packages.el) |
-| `claude/` | Claude Code settings, agents, commands |
+| `claude/` | Claude Code `settings.json`, `commands/`, statusline script |
 | `install.sh` | Homebrew-based install + XDG symlink script |
 
 ## Key Details
@@ -27,9 +27,10 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 - **Terminal**: Alacritty / iTerm. Both start in tmux (`zsh/.zshrc` tmux block, same as ArchDotfiles): reattach a detached session, else a new one; SSH lands in `main`; `NO_TMUX=1` skips
 - **tmux cheatsheet**: `prefix ?` or `cheat` (`tmux/cheatsheet.txt`)
 - **tmux sessions**: a `session-closed` hook (`tmux/scripts/save-on-close.sh`) re-saves resurrect so killed sessions aren't restored
-- **Editor**: nvim (Doom Emacs also configured, DOOMDIR=~/.config/doom)
+- **Editor**: `subl -w` for $EDITOR (Doom Emacs also configured, DOOMDIR=~/.config/doom)
 - **Git signing**: 1Password SSH via op-ssh-sign
-- **Version manager**: asdf (Homebrew install, data in ~/.local/share/asdf)
+- **Version manager**: mise (`mise activate zsh` in `zsh/.zshrc`; reads `.tool-versions`)
+- **Secrets**: not via 1Password (no `op run`); the 1Password SSH agent is still used for SSH and git signing
 - **Theme**: Gruvbox Dark everywhere
 - **Font**: FiraCode Nerd Font
 - **XDG**: All config under ~/.config, data under ~/.local/share, state under ~/.local/state
@@ -45,11 +46,12 @@ The install script writes a minimal `~/.zshenv` bootstrap and creates these syml
 - `~/.config/lazygit/` -> repo `lazygit/`
 - `~/.config/tmux/` -> repo `tmux/` (`tmux.conf` -> oh-my-tmux in `~/.local/share/tmux/`)
 - `~/.config/doom/` -> repo `doom/`
-- `~/.config/claude/` -> repo `claude/`
+- `~/.config/claude/` is a real directory (Claude Code's runtime state); `~/.claude` -> `~/.config/claude`. `CLAUDE_CONFIG_DIR` stays unset so GUI apps and the Keychain login keep working
+- `~/.config/claude/{settings.json,commands,awesome-statusline.sh}` -> repo `claude/`
 
 ## Data Locations (XDG)
 
 - Oh My Zsh: `~/.local/share/oh-my-zsh/`
-- asdf: `~/.local/share/asdf/`
+- mise: `~/.local/share/mise/`
 - ZSH history: `~/.local/state/zsh/history`
 - ZSH completion cache: `~/.cache/zsh/`

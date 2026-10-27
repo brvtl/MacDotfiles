@@ -34,14 +34,14 @@ Everything lives under `~/.config/` via directory symlinks:
 ~/.config/lazygit/           -> repo/lazygit/
 ~/.config/tmux/              -> repo/tmux/
 ~/.config/doom/              -> repo/doom/
-~/.config/claude/            -> repo/claude/
+~/.claude                    -> ~/.config/claude/ (real dir; settings.json, commands/, statusline -> repo/claude/)
 ```
 
 Data stored in XDG locations:
 
 ```
 ~/.local/share/oh-my-zsh/    Oh My Zsh
-~/.local/share/asdf/         asdf version manager
+~/.local/share/mise/         mise version manager
 ~/.local/state/zsh/history   ZSH history
 ```
 
