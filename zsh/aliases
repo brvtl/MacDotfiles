@@ -75,6 +75,7 @@ alias c='clear'
 alias h='history'
 alias j='jobs'
 alias path='echo $PATH | tr ":" "\n"'
+alias cheat='~/.config/tmux/scripts/cheatsheet.sh'
 
 # File operations
 alias cp='cp -i'

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Fuzzy-pick an existing tmux session or a project directory and switch to
 # it, creating a session named after the directory when there isn't one.
-# Bound to <prefix> o (in a popup).
+# Bound to Alt+o and <prefix> o (in a popup).
 set -euo pipefail
 
 roots=("$HOME/code" "$HOME/code/overdub")

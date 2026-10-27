@@ -15,7 +15,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | `alacritty/` | Alacritty terminal (Gruvbox Dark, FiraCode Nerd Font) |
 | `starship/` | Starship prompt config |
 | `lazygit/` | LazyGit UI config (Gruvbox Dark, vim keys) |
-| `tmux/` | oh-my-tmux customizations (`tmux.conf.local`), shared with ArchDotfiles |
+| `tmux/` | oh-my-tmux customizations (`tmux.conf.local`), `scripts/`, `cheatsheet.txt`; kept identical with ArchDotfiles (change both) |
 | `doom/` | Doom Emacs (init.el, config.el, packages.el) |
 | `claude/` | Claude Code settings, agents, commands |
 | `install.sh` | Homebrew-based install + XDG symlink script |
@@ -24,7 +24,9 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 
 - **OS**: macOS (Homebrew for package management)
 - **Shell**: ZSH with Oh My Zsh + Starship prompt
-- **Terminal**: Alacritty
+- **Terminal**: Alacritty / iTerm. Both start in tmux (`zsh/.zshrc` tmux block, same as ArchDotfiles): reattach a detached session, else a new one; SSH lands in `main`; `NO_TMUX=1` skips
+- **tmux cheatsheet**: `prefix ?` or `cheat` (`tmux/cheatsheet.txt`)
+- **tmux sessions**: a `session-closed` hook (`tmux/scripts/save-on-close.sh`) re-saves resurrect so killed sessions aren't restored
 - **Editor**: nvim (Doom Emacs also configured, DOOMDIR=~/.config/doom)
 - **Git signing**: 1Password SSH via op-ssh-sign
 - **Version manager**: asdf (Homebrew install, data in ~/.local/share/asdf)

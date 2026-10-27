@@ -159,3 +159,30 @@ bindkey '^y' yank
 # 1Password SSH Agent (macOS)
 [ -S "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" ] && \
     export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# =============================================================================
+# TMUX — every terminal and SSH login runs in tmux
+# =============================================================================
+# SSH: land in the shared, persistent "main" session.
+# Alacritty/Ghostty/iTerm (matched on what the terminal itself sets, which
+# editors launched from a terminal don't inherit): reattach a detached session
+# (e.g. one whose window was closed) or start a new one. Editor terminals (VS Code, Cursor, GoLand,
+# Emacs) stay plain. Detach (prefix d) drops back to a plain shell.
+# Skip with NO_TMUX=1 (e.g. `NO_TMUX=1 alacritty`, `ssh host -t NO_TMUX=1 zsh`)
+_tmux_autostart() {
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    tmux new-session -A -s main
+    return
+  fi
+  local detached
+  detached=$(tmux list-sessions -f '#{==:#{session_attached},0}' -F '#{session_name}' 2>/dev/null | head -n 1)
+  if [[ -n "$detached" ]]; then
+    tmux attach-session -t "=$detached"
+  else
+    tmux new-session
+  fi
+}
+if [[ -z "$TMUX" && -z "$NO_TMUX" && -o interactive ]] && command -v tmux >/dev/null \
+   && [[ -n "$SSH_CONNECTION" || "$TERM" == alacritty || "$TERM" == xterm-ghostty || "$TERM_PROGRAM" == iTerm.app ]]; then
+  _tmux_autostart
+fi
