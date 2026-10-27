@@ -28,14 +28,14 @@ C-a :                  command prompt
 F12                    hand keys to nested tmux over SSH (F12 again to return)
 
 ## session
-C-a o                  fuzzy pick a session or project
+Alt+o / C-a o          fuzzy pick a session or project
 C-a S                  session tree
 C-a w                  window tree
 C-a N                  new named session in current dir
 C-a $                  rename session
 C-a S then x           kill a session (from the tree)
 tmux kill-session -t NAME  kill a session from a shell
-C-a BSpace             back to last session
+Alt+; / C-a BSpace     back to last session
 C-a ( / C-a )          previous / next session
 C-a d                  detach (session keeps running)
 C-a C-s / C-a C-r      save / restore all sessions (auto-saved every 15m)
