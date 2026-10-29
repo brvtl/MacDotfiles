@@ -28,7 +28,8 @@ C-a :                  command prompt
 F12                    hand keys to nested tmux over SSH (F12 again to return)
 
 ## session
-Alt+o / C-a o          fuzzy pick a session or project
+Alt+o                  fuzzy pick an open session
+C-a o                  pick a session or project (new session)
 C-a S                  session tree
 C-a w                  window tree
 C-a N                  new named session in current dir
