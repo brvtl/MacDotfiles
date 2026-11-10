@@ -21,6 +21,7 @@ Refresh the Brewfile after installing things: `brew bundle dump --file=Brewfile 
 - **ZSH** - Oh My Zsh + Starship prompt + aliases/functions
 - **Ghostty** - main terminal (Gruvbox, Option acts as Alt for tmux)
 - **Alacritty** - backup terminal
+- **Raycast** - script commands in `raycast/scripts` (add the folder in Raycast → Settings → Extensions → Script Commands)
 - **Git** - 1Password SSH signing, GitHub CLI credentials, delta pager
 - **LazyGit** - Terminal UI for git
 - **tmux** - oh-my-tmux + Gruvbox pill status bar, resurrect/continuum, fzf session picker, searchable cheatsheet (`prefix ?`), every terminal starts in tmux
