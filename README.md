@@ -7,13 +7,20 @@ macOS dotfiles with Gruvbox Dark theme. XDG Base Directory compliant. Ported fro
 ```bash
 git clone git@github.com:brvtl/MacDotfiles.git ~/code/MacDotfiles
 cd ~/code/MacDotfiles
-./install.sh
+./install.sh            # everything
+./install.sh packages   # just `brew bundle` from Brewfile
+./install.sh macos      # just macOS settings (macos/defaults.sh)
 ```
+
+Refresh the Brewfile after installing things: `brew bundle dump --file=Brewfile --force --no-vscode --no-go --no-cargo --no-uv`
 
 ## What's Included
 
+- **Brewfile** - every Homebrew formula, cask and tap on the Mac
+- **macOS settings** - keyboard repeat, Dock, Finder, screenshots (`macos/defaults.sh`)
 - **ZSH** - Oh My Zsh + Starship prompt + aliases/functions
-- **Alacritty** - GPU-accelerated terminal
+- **Ghostty** - main terminal (Gruvbox, Option acts as Alt for tmux)
+- **Alacritty** - backup terminal
 - **Git** - 1Password SSH signing, GitHub CLI credentials, delta pager
 - **LazyGit** - Terminal UI for git
 - **tmux** - oh-my-tmux + Gruvbox pill status bar, resurrect/continuum, fzf session picker, searchable cheatsheet (`prefix ?`), every terminal starts in tmux
@@ -30,6 +37,7 @@ Everything lives under `~/.config/` via directory symlinks:
 ~/.config/zsh/               -> repo/zsh/
 ~/.config/git/               -> repo/git/
 ~/.config/alacritty/         -> repo/alacritty/
+~/.config/ghostty/           -> repo/ghostty/
 ~/.config/starship/          -> repo/starship/
 ~/.config/lazygit/           -> repo/lazygit/
 ~/.config/tmux/              -> repo/tmux/

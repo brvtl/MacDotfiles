@@ -651,3 +651,7 @@ set-hook -g 'session-closed[10]' 'run-shell -b "~/.config/tmux/scripts/save-on-c
 # "$@"
 # # /!\ do not remove the previous line
 # #     do not write below this line
+
+# Claude Code's native binary reports its version (e.g. "2.1.322") as the
+# process name, so automatic-rename shows that. Show "claude" instead.
+setw -g automatic-rename-format '#{?#{m/r:^[0-9]+\.[0-9]+\.[0-9]+$,#{pane_current_command}},claude,#{pane_current_command}}' #!important

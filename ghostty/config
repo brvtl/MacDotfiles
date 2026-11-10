@@ -1,0 +1,27 @@
+# Ghostty (macOS). Linux twin: ArchDotfiles/ghostty/config
+# Docs: https://ghostty.org/docs/config   Reload: cmd+shift+,
+
+theme = Gruvbox Dark
+font-family = FiraCode Nerd Font Mono
+font-size = 14
+
+window-padding-x = 10
+window-padding-y = 10
+background-opacity = 0.95
+macos-titlebar-style = tabs
+
+cursor-style = block
+cursor-style-blink = true
+shell-integration = zsh
+scrollback-limit = 50000
+
+# Option acts as Alt so tmux Alt bindings (e.g. Alt+o session picker) work.
+macos-option-as-alt = true
+
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard
+confirm-close-surface = false
+
+# Lets Claude Code tell shift+enter (newline) from enter (submit).
+keybind = shift+enter=text:\x1b\r
