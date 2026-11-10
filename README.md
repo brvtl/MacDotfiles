@@ -19,7 +19,6 @@ Refresh the Brewfile after installing things: `brew bundle dump --file=Brewfile 
 - **Brewfile** - every Homebrew formula, cask and tap on the Mac
 - **macOS settings** - keyboard repeat, Dock, Finder, screenshots (`macos/defaults.sh`)
 - **ZSH** - Oh My Zsh + Starship prompt + aliases/functions
-- **Ghostty** - main terminal (Gruvbox, Option-as-Alt for tmux)
 - **Ghostty** - main terminal (Gruvbox, Option acts as Alt for tmux)
 - **Alacritty** - backup terminal
 - **Git** - 1Password SSH signing, GitHub CLI credentials, delta pager
