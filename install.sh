@@ -125,44 +125,8 @@ migrate_data() {
 # =============================================================================
 
 install_packages() {
-    log_info "Installing Homebrew packages..."
-
-    local formulas=(
-        starship
-        fzf
-        fd
-        ripgrep
-        lazygit
-        tmux
-        git
-        neovim
-        git-delta
-        gh
-    )
-
-    local casks=(
-        alacritty
-        font-fira-code-nerd-font
-    )
-
-    for formula in "${formulas[@]}"; do
-        if brew list --formula "$formula" &>/dev/null; then
-            log_success "$formula already installed"
-        else
-            log_info "Installing $formula..."
-            brew install "$formula"
-        fi
-    done
-
-    for cask in "${casks[@]}"; do
-        if brew list --cask "$cask" &>/dev/null; then
-            log_success "$cask already installed"
-        else
-            log_info "Installing $cask..."
-            brew install --cask "$cask"
-        fi
-    done
-
+    log_info "Installing Homebrew packages from Brewfile..."
+    brew bundle install --file="$SCRIPT_DIR/Brewfile"
     log_success "Homebrew packages installed"
 }
 
@@ -203,6 +167,7 @@ setup_symlinks() {
 
     # Application configs
     create_symlink "$SCRIPT_DIR/alacritty" "$XDG_CONFIG_HOME/alacritty"
+    create_symlink "$SCRIPT_DIR/ghostty" "$XDG_CONFIG_HOME/ghostty"
     create_symlink "$SCRIPT_DIR/starship" "$XDG_CONFIG_HOME/starship"
     create_symlink "$SCRIPT_DIR/lazygit" "$XDG_CONFIG_HOME/lazygit"
     create_symlink "$SCRIPT_DIR/tmux" "$XDG_CONFIG_HOME/tmux"
@@ -289,18 +254,22 @@ setup_tmux() {
 }
 
 # =============================================================================
-# ASDF SETUP
+# MISE SETUP
 # =============================================================================
 
-setup_asdf() {
-    log_info "Checking asdf..."
+setup_mise() {
+    log_info "Checking mise..."
+    command -v mise &>/dev/null || brew install mise
+    [ -f "$HOME/.tool-versions" ] && mise install
+    log_success "mise configured"
+}
 
-    if ! brew list --formula asdf &>/dev/null; then
-        log_info "Installing asdf via Homebrew..."
-        brew install asdf
-    fi
+# =============================================================================
+# MACOS DEFAULTS
+# =============================================================================
 
-    log_success "asdf configured (Homebrew)"
+setup_macos() {
+    "$SCRIPT_DIR/macos/defaults.sh"
 }
 
 # =============================================================================
@@ -385,8 +354,11 @@ main() {
         zsh)
             setup_oh_my_zsh
             ;;
-        asdf)
-            setup_asdf
+        mise)
+            setup_mise
+            ;;
+        macos)
+            setup_macos
             ;;
         tmux)
             setup_tmux
@@ -406,13 +378,14 @@ main() {
             setup_xdg_dirs
             migrate_data
             setup_oh_my_zsh
-            setup_asdf
+            setup_mise
             setup_tmux
             setup_ssh
             cleanup_old_symlinks
             setup_symlinks
             setup_zshenv_bootstrap
             setup_doom_emacs
+            setup_macos
 
             echo ""
             log_success "Installation complete!"
@@ -423,7 +396,7 @@ main() {
             echo ""
             ;;
         *)
-            echo "Usage: $0 [packages|symlinks|zsh|asdf|tmux|doom|ssh|migrate|all]"
+            echo "Usage: $0 [packages|symlinks|zsh|mise|macos|tmux|doom|ssh|migrate|all]"
             exit 1
             ;;
     esac
