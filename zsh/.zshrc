@@ -148,10 +148,6 @@ bindkey '^r' fzf-history-widget
 
 [ -f "$ZDOTDIR/.zshrc.local" ] && source "$ZDOTDIR/.zshrc.local"
 
-# 1Password SSH Agent (macOS)
-[ -S "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" ] && \
-    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
 # =============================================================================
 # TMUX — every terminal and SSH login runs in tmux
 # =============================================================================

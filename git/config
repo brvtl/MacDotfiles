@@ -1,7 +1,8 @@
 [user]
 	email = peter@devthe.net
 	name = Peter Garbers
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILzxdtUdffO94cxWHTHSAddrS7mSX/IQajso4lYEFkWO
+	# key file on disk, not the 1Password agent (no Touch ID per commit)
+	signingkey = ~/.ssh/id_ed25519_signing
 [credential "https://github.com"]
 	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
@@ -11,7 +12,6 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 	allowedSignersFile = ~/.ssh/allowed_signers
 [commit]
 	gpgsign = true

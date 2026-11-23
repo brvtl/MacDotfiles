@@ -11,7 +11,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | Directory | Purpose |
 |-----------|---------|
 | `zsh/` | ZSH shell config (.zshrc, .zshenv, aliases, exports, functions) |
-| `git/` | Git config with 1Password SSH signing + global ignore |
+| `git/` | Git config with SSH commit signing (key file) + global ignore |
 | `alacritty/` | Alacritty terminal (Gruvbox Dark, FiraCode Nerd Font) |
 | `starship/` | Starship prompt config |
 | `lazygit/` | LazyGit UI config (Gruvbox Dark, vim keys) |
@@ -28,9 +28,9 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 - **tmux cheatsheet**: `prefix ?` or `cheat` (`tmux/cheatsheet.txt`)
 - **tmux sessions**: a `session-closed` hook (`tmux/scripts/save-on-close.sh`) re-saves resurrect so killed sessions aren't restored
 - **Editor**: `subl -w` for $EDITOR (Doom Emacs also configured, DOOMDIR=~/.config/doom)
-- **Git signing**: 1Password SSH via op-ssh-sign
+- **Git signing**: SSH, `~/.ssh/id_ed25519_signing` key file (no 1Password)
 - **Version manager**: mise (`mise activate zsh` in `zsh/.zshrc`; reads `.tool-versions`)
-- **Secrets**: not via 1Password (no `op run`); the 1Password SSH agent is still used for SSH and git signing
+- **Secrets**: not via 1Password (no `op run`). SSH and git signing use key files in `~/.ssh` (no 1Password agent, no Touch ID); `~/.ssh/config` is per-machine, not in this repo
 - **Theme**: Gruvbox Dark everywhere
 - **Font**: FiraCode Nerd Font
 - **XDG**: All config under ~/.config, data under ~/.local/share, state under ~/.local/state
