@@ -25,3 +25,6 @@ confirm-close-surface = false
 
 # Lets Claude Code tell shift+enter (newline) from enter (submit).
 keybind = shift+enter=text:\x1b\r
+
+# Cmd+/ (Super+/ on Arch) opens the tmux cheatsheet: send Alt+/ for tmux's M-/ binding.
+keybind = cmd+/=text:\x1b/
