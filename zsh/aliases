@@ -105,3 +105,10 @@ alias lg='lazygit'
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
 alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
+
+# Tailscale: the app (tailscale-app cask) ships its CLI inside the bundle and
+# puts nothing on PATH. Machines with the tailscale formula (ghastly) already
+# have the command, so this only applies where it is missing.
+if ! command -v tailscale &>/dev/null && [ -x /Applications/Tailscale.app/Contents/MacOS/Tailscale ]; then
+    alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
+fi
