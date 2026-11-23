@@ -4,7 +4,7 @@
 # Format: "## section" headers, then "keys  description" separated by 2+ spaces.
 
 ## tmux
-C-a ?                  this cheatsheet
+C-a ? / Cmd+/          this cheatsheet
 C-a c                  new window (current dir)
 C-a ,                  rename window
 C-a | / C-a v          split side by side

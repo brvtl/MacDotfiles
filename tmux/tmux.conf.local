@@ -473,11 +473,17 @@ bind BSpace switch-client -l
 bind -n M-o display-popup -E -w 60% -h 60% "~/.config/tmux/scripts/sessionizer.sh"
 bind -n M-\; switch-client -l
 
+# popups match the gruvbox theme (tmux 3.8 defaults to a mid-grey popup)
+set -g popup-style "bg=#282828,fg=#ebdbb2"
+set -g popup-border-style "bg=#282828,fg=#504945"
+set -g popup-border-lines rounded
+
 # popups in the current dir: t scratch shell, g lazygit
 bind t display-popup -E -w 80% -h 80% -d "#{pane_current_path}"
 bind g display-popup -E -w 90% -h 90% -d "#{pane_current_path}" lazygit
 # ? searchable cheatsheet (tmux/cheatsheet.txt + the machine's own sheet)
 bind ? display-popup -E -w 80% -h 80% "~/.config/tmux/scripts/cheatsheet.sh" #!important
+bind -n M-/ display-popup -E -w 80% -h 80% "~/.config/tmux/scripts/cheatsheet.sh" #!important
 
 # y or a mouse drag copies the selection: OSC 52 (set-clipboard above) carries
 # it to the machine you're sitting at, and scripts/copy.sh puts it in this
