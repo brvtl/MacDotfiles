@@ -1,3 +1,9 @@
+require "socket"
+
+# ghastly is an SSH-only Mac: no VPN client, and no Command Line Tools update,
+# so nothing that has to build from source (Stripe CLI, emacs-plus).
+ghastly = Socket.gethostname.split(".").first == "ghastly"
+
 tap "bitwise-media-group/tap"
 tap "d12frosted/emacs-plus"
 tap "stripe/stripe-cli"
@@ -36,11 +42,11 @@ brew "poppler"
 # Object-relational database system
 brew "postgresql@16", link: true
 # GNU Emacs for Doom (doom/), native compilation
-brew "d12frosted/emacs-plus/emacs-plus@30"
+brew "d12frosted/emacs-plus/emacs-plus@30" unless ghastly
 # Cross-shell prompt for astronauts
 brew "starship"
 # Command-line tool for Stripe
-brew "stripe/stripe-cli/stripe"
+brew "stripe/stripe-cli/stripe" unless ghastly
 # Multi-modal AI tool to extract and summarize content
 brew "summarize"
 # Terminal multiplexer
@@ -66,7 +72,7 @@ cask "discord"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # VPN client for secure and private internet access
-cask "expressvpn"
+cask "expressvpn" unless ghastly
 cask "font-fira-code-nerd-font"
 # Fast, native terminal emulator (ghostty/ config)
 cask "ghostty"
