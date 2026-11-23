@@ -306,17 +306,10 @@ setup_ssh() {
 
     mkdir -p "$HOME/.ssh"
 
-    # Create SSH config for 1Password agent
-    local ssh_config="$HOME/.ssh/config"
-    if [ ! -f "$ssh_config" ] || ! grep -q "IdentityAgent" "$ssh_config"; then
-        cat >> "$ssh_config" <<'EOF'
-Host *
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-EOF
-        log_success "SSH config updated with 1Password agent"
-    else
-        log_success "SSH config already has 1Password agent"
-    fi
+    # ~/.ssh/config is per-machine and uses key files in ~/.ssh, not the
+    # 1Password agent, so it is left alone here.
+    [ -f "$HOME/.ssh/id_ed25519_signing" ] || \
+        log_warn "No ~/.ssh/id_ed25519_signing: signed git commits will fail until it is copied here"
 
     # Create allowed_signers file for git commit verification
     local allowed_signers="$HOME/.ssh/allowed_signers"
