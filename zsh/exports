@@ -10,7 +10,8 @@ export LC_ALL=en_US.UTF-8
 export EDITOR='subl -w'
 export VISUAL='subl -w'
 
-# Go configuration (using mise)
+# Go: the toolchain comes from mise (global default in ~/.config/mise/config.toml),
+# which also sets GOROOT and GOBIN per version. GOPATH holds the module cache.
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
@@ -26,6 +27,3 @@ fi
 
 # Add ~/.local/bin to PATH
 export PATH="$HOME/.local/bin:$PATH"
-
-# JetBrains Toolbox scripts (was in ~/.zprofile, which ZDOTDIR bypasses)
-export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
