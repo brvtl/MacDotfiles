@@ -82,18 +82,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 
 # =============================================================================
-# MISE VERSION MANAGER
-# =============================================================================
-
-# Reads .tool-versions and .mise.toml
-eval "$(/opt/homebrew/bin/mise activate zsh)"
-
-# =============================================================================
 # MODULAR CONFIGURATION
 # =============================================================================
 
 # Source exports
 [ -f "$ZDOTDIR/exports" ] && source "$ZDOTDIR/exports"
+
+# =============================================================================
+# MISE VERSION MANAGER
+# =============================================================================
+
+# After exports, so mise's tools sit ahead of ~/.local/bin and other PATH
+# additions there. Reads mise/config.toml (global), .mise.toml, .tool-versions.
+eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 # Source aliases
 [ -f "$ZDOTDIR/aliases" ] && source "$ZDOTDIR/aliases"
