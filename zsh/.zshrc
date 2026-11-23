@@ -94,6 +94,9 @@ eval "$(starship init zsh)"
 
 # After exports, so mise's tools sit ahead of ~/.local/bin and other PATH
 # additions there. Reads mise/config.toml (global), .mise.toml, .tool-versions.
+# Drop mise state inherited from a parent shell (tmux panes get the tmux
+# server's env): with it, mise keeps the parent's PATH order, ~/.local/bin first.
+unset -m '__MISE_*'
 eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 # Source aliases
