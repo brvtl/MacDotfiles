@@ -170,6 +170,7 @@ setup_symlinks() {
     create_symlink "$SCRIPT_DIR/ghostty" "$XDG_CONFIG_HOME/ghostty"
     create_symlink "$SCRIPT_DIR/starship" "$XDG_CONFIG_HOME/starship"
     create_symlink "$SCRIPT_DIR/lazygit" "$XDG_CONFIG_HOME/lazygit"
+    create_symlink "$SCRIPT_DIR/mise" "$XDG_CONFIG_HOME/mise"
     create_symlink "$SCRIPT_DIR/tmux" "$XDG_CONFIG_HOME/tmux"
     create_symlink "$SCRIPT_DIR/doom" "$XDG_CONFIG_HOME/doom"
 
@@ -260,7 +261,8 @@ setup_tmux() {
 setup_mise() {
     log_info "Checking mise..."
     command -v mise &>/dev/null || brew install mise
-    [ -f "$HOME/.tool-versions" ] && mise install
+    # tools live in mise/config.toml (linked to ~/.config/mise by setup_symlinks)
+    mise install
     log_success "mise configured"
 }
 

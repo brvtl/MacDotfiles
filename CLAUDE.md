@@ -18,6 +18,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | `tmux/` | oh-my-tmux customizations (`tmux.conf.local`), `scripts/`, `cheatsheet.txt`; kept identical with ArchDotfiles (change both) |
 | `doom/` | Doom Emacs (init.el, config.el, packages.el) |
 | `claude/` | Claude Code `settings.json`, `commands/`, statusline script |
+| `mise/` | Global mise tool versions (`config.toml`) |
 | `install.sh` | Homebrew-based install + XDG symlink script |
 
 ## Key Details
@@ -29,7 +30,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 - **tmux sessions**: a `session-closed` hook (`tmux/scripts/save-on-close.sh`) re-saves resurrect so killed sessions aren't restored
 - **Editor**: `subl -w` for $EDITOR (Doom Emacs also configured, DOOMDIR=~/.config/doom)
 - **Git signing**: SSH, `~/.ssh/id_ed25519_signing` key file (no 1Password)
-- **Version manager**: mise (`mise activate zsh` in `zsh/.zshrc`; reads `.tool-versions`)
+- **Version manager**: mise (`mise activate zsh` in `zsh/.zshrc`); global tools in `mise/config.toml`, projects may still use `.tool-versions`
 - **Secrets**: not via 1Password (no `op run`). SSH and git signing use key files in `~/.ssh` (no 1Password agent, no Touch ID); `~/.ssh/config` is per-machine, not in this repo
 - **Theme**: Gruvbox Dark everywhere
 - **Font**: FiraCode Nerd Font
@@ -44,6 +45,7 @@ The install script writes a minimal `~/.zshenv` bootstrap and creates these syml
 - `~/.config/alacritty/` -> repo `alacritty/`
 - `~/.config/starship/` -> repo `starship/`
 - `~/.config/lazygit/` -> repo `lazygit/`
+- `~/.config/mise/` -> repo `mise/` (global tools: node, bun, uv, go, yq)
 - `~/.config/tmux/` -> repo `tmux/` (`tmux.conf` -> oh-my-tmux in `~/.local/share/tmux/`)
 - `~/.config/doom/` -> repo `doom/`
 - `~/.config/claude/` is a real directory (Claude Code's runtime state); `~/.claude` -> `~/.config/claude`. `CLAUDE_CONFIG_DIR` stays unset so GUI apps and the Keychain login keep working
