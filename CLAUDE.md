@@ -25,7 +25,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 
 - **OS**: macOS (Homebrew for package management)
 - **Shell**: ZSH with Oh My Zsh + Starship prompt
-- **Terminal**: Alacritty / iTerm. Both start in tmux (`zsh/.zshrc` tmux block, same as ArchDotfiles): reattach a detached session, else a new one; SSH lands in `main`; `NO_TMUX=1` skips
+- **Terminal**: Ghostty (primary; `ghostty/config`: Option as Alt, Cmd+/ cheatsheet, ssh terminfo), with Alacritty / iTerm still supported. All start in tmux (`zsh/.zshrc` tmux block, same as ArchDotfiles): reattach a detached session, else a new one; SSH lands in `main`; `NO_TMUX=1` skips
 - **tmux cheatsheet**: `prefix ?` or `cheat` (`tmux/cheatsheet.txt`)
 - **tmux sessions**: a `session-closed` hook (`tmux/scripts/save-on-close.sh`) re-saves resurrect so killed sessions aren't restored
 - **Editor**: `subl -w` for $EDITOR (Doom Emacs also configured, DOOMDIR=~/.config/doom)
