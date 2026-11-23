@@ -1,7 +1,8 @@
 require "socket"
 
-# ghastly is an SSH-only Mac: no VPN client, and no Command Line Tools update,
-# so nothing that has to build from source (Stripe CLI, emacs-plus).
+# ghastly is an SSH-only Mac: no VPN client, Tailscale as the headless daemon
+# rather than the app, and no Command Line Tools update, so nothing that has to
+# build from source (Stripe CLI, emacs-plus).
 ghastly = Socket.gethostname.split(".").first == "ghastly"
 
 tap "bitwise-media-group/tap"
@@ -45,6 +46,8 @@ brew "postgresql@16", link: true
 brew "d12frosted/emacs-plus/emacs-plus@30" unless ghastly
 # Cross-shell prompt for astronauts
 brew "starship"
+# Tailscale daemon only (ghastly runs it as a service; it carries our SSH)
+brew "tailscale" if ghastly
 # Command-line tool for Stripe
 brew "stripe/stripe-cli/stripe" unless ghastly
 # Multi-modal AI tool to extract and summarize content
@@ -102,7 +105,7 @@ cask "spotify"
 # Text editor for code, markup and prose
 cask "sublime-text"
 # Mesh VPN based on WireGuard
-cask "tailscale-app"
+cask "tailscale-app" unless ghastly
 # Messaging app with a focus on speed and security
 cask "telegram"
 # Open-source BitTorrent client
