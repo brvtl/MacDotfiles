@@ -12,6 +12,12 @@ cd ~/code/MacDotfiles
 ./install.sh macos      # just macOS settings (macos/defaults.sh)
 ```
 
+**Work machine:** `DOTFILES_PROFILE=work ./install.sh`. The profile is saved in
+`~/.config/dotfiles/profile`, so later runs (and plain `brew bundle`) remember it.
+Work skips personal apps and personal-project tools in the Brewfile (`unless work`)
+and writes a gitignored `git/config.local` with your work email and signing off.
+Extra tmux project folders go in `SESSIONIZER_ROOTS` in the gitignored `zsh/.zshrc.local`.
+
 Refresh the Brewfile after installing things: `brew bundle dump --file=Brewfile --force --no-vscode --no-go --no-cargo --no-uv`
 
 ## What's Included

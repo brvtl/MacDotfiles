@@ -32,3 +32,6 @@ tmux/plugins/
 
 # Machine-local zsh config (sourced by .zshrc, not tracked)
 zsh/.zshrc.local
+
+# Machine-local git overrides (install.sh writes one on work machines)
+git/config.local
