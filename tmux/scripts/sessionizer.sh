@@ -5,7 +5,13 @@
 # Bound to Alt+o (sessions) and <prefix> o (--projects), in a popup.
 set -euo pipefail
 
-roots=("$HOME/code" "$HOME/code/overdub")
+# Project roots: ~/code, plus any extra colon-separated dirs in
+# SESSIONIZER_ROOTS (set it in an untracked file, e.g. zsh/.zshrc.local).
+roots=("$HOME/code")
+IFS=: read -ra extra <<< "${SESSIONIZER_ROOTS:-}"
+for r in ${extra[@]+"${extra[@]}"}; do
+  if [[ -n $r ]]; then roots+=("$r"); fi
+done
 
 list() {
   tmux list-sessions -F '#S' 2>/dev/null

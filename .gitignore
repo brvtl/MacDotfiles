@@ -29,3 +29,6 @@ claude/*
 # tmux: oh-my-tmux symlink (made by install.sh) and TPM plugins
 tmux/tmux.conf
 tmux/plugins/
+
+# Machine-local zsh config (sourced by .zshrc, not tracked)
+zsh/.zshrc.local

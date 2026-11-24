@@ -5,7 +5,7 @@
 # @raycast.mode silent
 # @raycast.packageName Dev
 # @raycast.icon 📂
-# @raycast.argument1 { "type": "text", "placeholder": "project (e.g. overdub/cloud)", "optional": true }
+# @raycast.argument1 { "type": "text", "placeholder": "project (e.g. myapp or org/repo)", "optional": true }
 # @raycast.description Open ~/code/<project> as a tmux session in Ghostty (empty = tmux picker)
 
 export PATH="/opt/homebrew/bin:$PATH"
