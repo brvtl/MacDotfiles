@@ -28,6 +28,28 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
 # =============================================================================
+# PROFILE
+# =============================================================================
+
+# Machine profile, "personal" (default) or "work", kept in a machine-local
+# file. `DOTFILES_PROFILE=work ./install.sh` sets it; the Brewfile reads the
+# file (brew drops other env vars) and work skips personal apps and git identity.
+PROFILE_FILE="$XDG_CONFIG_HOME/dotfiles/profile"
+
+setup_profile() {
+    if [ -n "${DOTFILES_PROFILE:-}" ]; then
+        case "$DOTFILES_PROFILE" in
+            personal|work) ;;
+            *) log_error "DOTFILES_PROFILE must be personal or work"; exit 1 ;;
+        esac
+        mkdir -p "$(dirname "$PROFILE_FILE")"
+        echo "$DOTFILES_PROFILE" > "$PROFILE_FILE"
+    fi
+    PROFILE=$(cat "$PROFILE_FILE" 2>/dev/null || echo personal)
+    log_info "Profile: $PROFILE"
+}
+
+# =============================================================================
 # XDG DIRECTORY SETUP
 # =============================================================================
 
@@ -300,6 +322,41 @@ setup_doom_emacs() {
 }
 
 # =============================================================================
+# GIT (per-machine overrides)
+# =============================================================================
+
+# git/config includes git/config.local (gitignored). On a work machine it
+# replaces the personal email and turns off signing, since the personal
+# signing key isn't there.
+setup_git_local() {
+    [ "$PROFILE" = work ] || return 0
+    local local_config="$SCRIPT_DIR/git/config.local"
+    if [ -f "$local_config" ]; then
+        log_success "git/config.local already exists"
+        return 0
+    fi
+
+    local email=""
+    if [ -t 0 ]; then
+        read -rp "Work git email: " email
+    fi
+    cat > "$local_config" <<EOF
+# Work machine overrides for git/config (gitignored, made by install.sh)
+[user]
+	email = ${email:-SET-YOUR-WORK-EMAIL}
+[commit]
+	gpgsign = false
+[tag]
+	gpgsign = false
+EOF
+    if [ -n "$email" ]; then
+        log_success "Created git/config.local for $email"
+    else
+        log_warn "Created git/config.local: set your work email in $local_config"
+    fi
+}
+
+# =============================================================================
 # SSH SETUP
 # =============================================================================
 
@@ -310,7 +367,7 @@ setup_ssh() {
 
     # ~/.ssh/config is per-machine and uses key files in ~/.ssh, not the
     # 1Password agent, so it is left alone here.
-    [ -f "$HOME/.ssh/id_ed25519_signing" ] || \
+    [ "$PROFILE" = work ] || [ -f "$HOME/.ssh/id_ed25519_signing" ] || \
         log_warn "No ~/.ssh/id_ed25519_signing: signed git commits will fail until it is copied here"
 
     # Create allowed_signers file for git commit verification
@@ -335,6 +392,8 @@ main() {
     echo "   macOS Dotfiles Installation Script"
     echo "=========================================="
     echo ""
+
+    setup_profile
 
     case "${1:-all}" in
         packages)
@@ -364,6 +423,9 @@ main() {
         ssh)
             setup_ssh
             ;;
+        git)
+            setup_git_local
+            ;;
         migrate)
             setup_xdg_dirs
             migrate_data
@@ -379,6 +441,7 @@ main() {
             cleanup_old_symlinks
             setup_symlinks
             setup_zshenv_bootstrap
+            setup_git_local
             setup_doom_emacs
             setup_macos
 
@@ -391,7 +454,7 @@ main() {
             echo ""
             ;;
         *)
-            echo "Usage: $0 [packages|symlinks|zsh|mise|macos|tmux|doom|ssh|migrate|all]"
+            echo "Usage: $0 [packages|symlinks|zsh|mise|macos|tmux|doom|ssh|git|migrate|all]"
             exit 1
             ;;
     esac

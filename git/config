@@ -17,3 +17,6 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
+[include]
+	# machine-local overrides (gitignored; work email/signing, see install.sh)
+	path = config.local

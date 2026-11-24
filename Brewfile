@@ -5,9 +5,16 @@ require "socket"
 # build from source (Stripe CLI, emacs-plus).
 ghastly = Socket.gethostname.split(".").first == "ghastly"
 
-tap "bitwise-media-group/tap"
+# Profile: "work" installs only the dev/terminal tooling and skips personal apps
+# and personal-project tools (marked `unless work`). Set per machine with
+# `DOTFILES_PROFILE=work ./install.sh`, which saves it to ~/.config/dotfiles/profile.
+# Read from that file, not the environment: brew drops non-HOMEBREW_ variables.
+profile_file = File.expand_path("~/.config/dotfiles/profile")
+work = File.exist?(profile_file) && File.read(profile_file).strip == "work"
+
+tap "bitwise-media-group/tap" unless work
 tap "d12frosted/emacs-plus"
-tap "stripe/stripe-cli"
+tap "stripe/stripe-cli" unless work
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Formatting tools for C, C++, Obj-C, Java, JavaScript, TypeScript
@@ -17,7 +24,7 @@ brew "coreutils"
 # YAML Parser
 brew "libyaml"
 # Easiest way to build and release mobile apps
-brew "fastlane"
+brew "fastlane" unless work
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
@@ -33,13 +40,13 @@ brew "lazygit"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # Lightweight PDF and XPS viewer
-brew "mupdf"
+brew "mupdf" unless work
 # Development kit for the Java programming language
 brew "openjdk"
 # Your Gateway to Embedded Software Development Excellence
-brew "platformio"
+brew "platformio" unless work
 # PDF rendering library (based on the xpdf-3.0 code base)
-brew "poppler"
+brew "poppler" unless work
 # Object-relational database system
 brew "postgresql@16", link: true
 # GNU Emacs for Doom (doom/), native compilation
@@ -49,21 +56,21 @@ brew "starship"
 # Tailscale daemon only (ghastly runs it as a service; it carries our SSH)
 brew "tailscale" if ghastly
 # Command-line tool for Stripe
-brew "stripe/stripe-cli/stripe" unless ghastly
+brew "stripe/stripe-cli/stripe" unless ghastly || work
 # Multi-modal AI tool to extract and summarize content
-brew "summarize"
+brew "summarize" unless work
 # Terminal multiplexer
 brew "tmux"
 # Generate your Xcode project from a spec file and your folder structure
-brew "xcodegen"
+brew "xcodegen" unless work
 # Password manager that keeps all passwords secure behind one password
-cask "1password"
+cask "1password" unless work
 # Chromium based browser
-cask "arc"
+cask "arc" unless work
 # 3D model slicing software for 3D printers, maintained by Bambu Lab
-cask "bambu-studio"
+cask "bambu-studio" unless work
 # OpenAI's official ChatGPT desktop app
-cask "chatgpt"
+cask "chatgpt" unless work
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -71,11 +78,11 @@ cask "claude-code"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 # Voice and text chat software
-cask "discord"
+cask "discord" unless work
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # VPN client for secure and private internet access
-cask "expressvpn" unless ghastly
+cask "expressvpn" unless ghastly || work
 cask "font-fira-code-nerd-font"
 # Fast, native terminal emulator (ghostty/ config)
 cask "ghostty"
@@ -84,36 +91,36 @@ cask "gcloud-cli"
 # Web browser
 cask "google-chrome"
 # AI-first web browser from The Browser Company
-cask "thebrowsercompany-dia"
+cask "thebrowsercompany-dia" unless work
 # AI teammates that work across your apps and tools
-cask "grok-bot"
+cask "grok-bot" unless work
 # Extensible coding agent for the terminal
-cask "grok-build"
+cask "grok-build" unless work
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
-cask "patchy"
+cask "patchy" unless work
 # Control your tools with a few keystrokes
 cask "raycast"
 # Instant messaging application focusing on security
-cask "signal"
+cask "signal" unless work
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
-cask "spotify"
+cask "spotify" unless work
 # Text editor for code, markup and prose
 cask "sublime-text"
 # Mesh VPN based on WireGuard
-cask "tailscale-app" unless ghastly
+cask "tailscale-app" unless ghastly || work
 # Messaging app with a focus on speed and security
-cask "telegram"
+cask "telegram" unless work
 # Open-source BitTorrent client
-cask "transmission"
+cask "transmission" unless work
 # Native desktop client for WhatsApp
-cask "whatsapp"
-npm "@colbymchenry/codegraph"
+cask "whatsapp" unless work
+npm "@colbymchenry/codegraph" unless work
 npm "corepack"
-npm "firebase-tools"
+npm "firebase-tools" unless work
 npm "pnpm"
-npm "vercel"
+npm "vercel" unless work

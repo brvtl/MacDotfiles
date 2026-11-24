@@ -11,7 +11,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 | Directory | Purpose |
 |-----------|---------|
 | `zsh/` | ZSH shell config (.zshrc, .zshenv, aliases, exports, functions) |
-| `git/` | Git config with SSH commit signing (key file) + global ignore |
+| `git/` | Git config with SSH commit signing (key file) + global ignore; includes gitignored `config.local` (work email, signing off) |
 | `alacritty/` | Alacritty terminal (Gruvbox Dark, FiraCode Nerd Font) |
 | `starship/` | Starship prompt config |
 | `lazygit/` | LazyGit UI config (Gruvbox Dark, vim keys) |
@@ -30,6 +30,7 @@ This is a macOS user dotfiles repository containing shell configuration, termina
 - **tmux sessions**: a `session-closed` hook (`tmux/scripts/save-on-close.sh`) re-saves resurrect so killed sessions aren't restored
 - **Editor**: `subl -w` for $EDITOR (Doom Emacs also configured, DOOMDIR=~/.config/doom)
 - **Git signing**: SSH, `~/.ssh/id_ed25519_signing` key file (no 1Password)
+- **Profiles**: `personal` (default) or `work`, in `~/.config/dotfiles/profile`, set by `DOTFILES_PROFILE=work ./install.sh`. The Brewfile reads the file (brew strips other env vars); mark personal-only entries `unless work`. Work writes `git/config.local`
 - **Version manager**: mise (`mise activate zsh` in `zsh/.zshrc`); global tools in `mise/config.toml`, projects may still use `.tool-versions`
 - **Secrets**: not via 1Password (no `op run`). SSH and git signing use key files in `~/.ssh` (no 1Password agent, no Touch ID); `~/.ssh/config` is per-machine, not in this repo
 - **Theme**: Gruvbox Dark everywhere
