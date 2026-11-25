@@ -146,7 +146,22 @@ migrate_data() {
 # HOMEBREW PACKAGES
 # =============================================================================
 
+# Homebrew 7 refuses to load formulae/casks from third-party taps until they
+# are trusted, and an untrusted tap's dependencies are invisible to cleanup
+# (which is how emacs-plus lost its jpeg). Trust the Brewfile's taps for this
+# profile up front; trusting works before a tap is added.
+trust_taps() {
+    brew trust --help &>/dev/null || return 0
+    local taps
+    taps=$(HOMEBREW_NO_AUTO_UPDATE=1 brew bundle list --tap --file="$SCRIPT_DIR/Brewfile" 2>/dev/null)
+    [ -n "$taps" ] || return 0
+    # shellcheck disable=SC2086 # one tap name per word
+    brew trust --tap $taps >/dev/null
+    log_success "Trusted taps: $(echo $taps)"
+}
+
 install_packages() {
+    trust_taps
     log_info "Installing Homebrew packages from Brewfile..."
     brew bundle install --file="$SCRIPT_DIR/Brewfile"
     log_success "Homebrew packages installed"
